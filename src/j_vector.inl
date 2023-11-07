@@ -323,153 +323,27 @@ namespace just
     }
 
     template <typename T, typename Allocator>
-    typename j_vector<T, Allocator>::iterator j_vector<T, Allocator>::begin()
+    j_vector<T, Allocator>::j_vector_iterator<T> j_vector<T, Allocator>::begin()
     {
-        return iterator(m_array);
+        return j_vector_iterator(m_array);
     }
 
     template <typename T, typename Allocator>
-    typename j_vector<T, Allocator>::iterator j_vector<T, Allocator>::end()
+    j_vector<T, Allocator>::j_vector_iterator<T> j_vector<T, Allocator>::end()
     {
-        return iterator(&m_array[m_size]);
+        return j_vector_iterator(&m_array[m_size]);
     }
 
     template <typename T, typename Allocator>
-    typename j_vector<T, Allocator>::const_iterator j_vector<T, Allocator>::cbegin() const
+    j_vector<T, Allocator>::j_vector_iterator<const T> j_vector<T, Allocator>::cbegin() const
     {
         return const_iterator(m_array);
     }
 
     template <typename T, typename Allocator>
-    typename j_vector<T, Allocator>::const_iterator j_vector<T, Allocator>::cend() const
+    j_vector<T, Allocator>::j_vector_iterator<const T> j_vector<T, Allocator>::cend() const
     {
         return const_iterator(&m_array[m_size]);
-    }
-
-    template <typename T, typename Allocator>
-    j_vector<T, Allocator>::iterator::iterator(T *first) : m_current(first)
-    {
-    }
-
-    template <typename T, typename Allocator>
-    T &j_vector<T, Allocator>::iterator::operator++()
-    {
-        return *(++m_current);
-    }
-
-    template <typename T, typename Allocator>
-    T &j_vector<T, Allocator>::iterator::operator++(int)
-    {
-        T *temp = m_current;
-        m_current += 1;
-        return *temp;
-    }
-
-    template <typename T, typename Allocator>
-    T &j_vector<T, Allocator>::iterator::operator--()
-    {
-        return *(m_current -= 1);
-    }
-
-    template <typename T, typename Allocator>
-    T &j_vector<T, Allocator>::iterator::operator--(int)
-    {
-        T *temp = m_current;
-        m_current -= 1;
-        return *temp;
-    }
-
-    template <typename T, typename Allocator>
-    bool j_vector<T, Allocator>::iterator::operator==(const iterator &itr2) const noexcept
-    {
-        return this->m_current == itr2.m_current;
-    }
-
-    template <typename T, typename Allocator>
-    bool j_vector<T, Allocator>::iterator::operator!=(const iterator &itr2) const noexcept
-    {
-        return !(*this == itr2);
-    }
-
-    template <typename T, typename Allocator>
-    T &j_vector<T, Allocator>::iterator::operator-(const int value)
-    {
-        return *(m_current -= value);
-    }
-
-    template <typename T, typename Allocator>
-    T &j_vector<T, Allocator>::iterator::operator+(const int value)
-    {
-        return *(m_current += value);
-    }
-
-    template <typename T, typename Allocator>
-    T &j_vector<T, Allocator>::iterator::operator*()
-    {
-        return (*m_current);
-    }
-
-    template <typename T, typename Allocator>
-    j_vector<T, Allocator>::const_iterator::const_iterator(const T *first) : m_current(first)
-    {
-    }
-
-    template <typename T, typename Allocator>
-    const T &j_vector<T, Allocator>::const_iterator::operator++()
-    {
-        return *(++m_current);
-    }
-
-    template <typename T, typename Allocator>
-    const T &j_vector<T, Allocator>::const_iterator::operator++(int)
-    {
-        const T *temp = m_current;
-        m_current += 1;
-        return *temp;
-    }
-
-    template <typename T, typename Allocator>
-    const T &j_vector<T, Allocator>::const_iterator::operator--()
-    {
-        return *(m_current -= 1);
-    }
-
-    template <typename T, typename Allocator>
-    const T &j_vector<T, Allocator>::const_iterator::operator--(int)
-    {
-        T *temp = m_current;
-        m_current -= 1;
-        return *temp;
-    }
-
-    template <typename T, typename Allocator>
-    const T &j_vector<T, Allocator>::const_iterator::operator-(const int value)
-    {
-        return *(m_current -= value);
-    }
-
-    template <typename T, typename Allocator>
-    const T &j_vector<T, Allocator>::const_iterator::operator+(const int value)
-    {
-        return *(m_current += value);
-    }
-
-    template <typename T, typename Allocator>
-    const T &j_vector<T, Allocator>::const_iterator::operator*()
-    {
-        return (*m_current);
-    }
-
-    template <typename T, typename Allocator>
-    bool j_vector<T, Allocator>::const_iterator::operator==(const const_iterator &itr2) const noexcept
-    {
-        return this->m_current == itr2.m_current;
-    }
-
-    template <typename T, typename Allocator>
-    bool j_vector<T, Allocator>::const_iterator::operator!=(const const_iterator &itr2) const noexcept
-    {
-        return !(*this == itr2);
     }
 
     template <typename T, typename Allocator>

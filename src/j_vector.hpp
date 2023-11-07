@@ -17,8 +17,30 @@ namespace just
         void check_capacity();
         void change_array_capacity(const int capacity);
         void change_array_size(const int size);
+        template<typename U>
+        class j_vector_iterator
+        {
+        private:
+            U *m_current;
+
+        public:
+            j_vector_iterator(U *first);
+
+            j_vector_iterator &operator++();
+            j_vector_iterator operator++(int);
+            j_vector_iterator &operator--();
+            j_vector_iterator operator--(int);
+            j_vector_iterator &operator+(const int value);
+            j_vector_iterator &operator-(const int value);
+            U &operator*();
+            bool operator==(const j_vector_iterator &itr2) const noexcept;
+            bool operator!=(const j_vector_iterator &itr2) const noexcept;
+        };
 
     public:
+        using iterator = j_vector_iterator<T>;
+        using const_iterator = j_vector_iterator<const T>;
+
         j_vector(const int capacity = 0, const Allocator &alloc = Allocator());
         j_vector(const int size, const T &value, const Allocator &alloc = Allocator());
         j_vector(const std::initializer_list<T> &list, const Allocator &alloc = Allocator());
@@ -57,44 +79,6 @@ namespace just
             virtual const char *what() const noexcept override;
         };
 
-        class iterator
-        {
-        private:
-            T *m_current;
-
-        public:
-            iterator(T *first);
-
-            T &operator++();
-            T &operator++(int);
-            T &operator--();
-            T &operator--(int);
-            T &operator+(const int value);
-            T &operator-(const int value);
-            T &operator*();
-            bool operator==(const iterator &itr2) const noexcept;
-            bool operator!=(const iterator &itr2) const noexcept;
-        };
-
-        class const_iterator
-        {
-        private:
-            const T *m_current;
-
-        public:
-            const_iterator(const T *first);
-
-            const T &operator++();
-            const T &operator++(int);
-            const T &operator--();
-            const T &operator--(int);
-            const T &operator+(const int value);
-            const T &operator-(const int value);
-            const T &operator*();
-            bool operator==(const const_iterator &itr2) const noexcept;
-            bool operator!=(const const_iterator &itr2) const noexcept;
-        };
-
         iterator begin();
         iterator end();
         const_iterator cbegin() const;
@@ -102,3 +86,4 @@ namespace just
     };
 }
 #include "j_vector.inl"
+#include "j_vector_iterator.inl"
